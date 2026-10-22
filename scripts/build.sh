@@ -24,8 +24,8 @@ print('All tracked modified smali sources match generated patches')
 PY
 java -jar tools/apktool.jar b build/patch -o build/rebuilt.apk > out/build.log 2>&1
 python3 scripts/assemble.py
-java -jar tools/signer.jar -a build/unsigned/HeeSay-v3-single.apk -o build/signed --allowResign > out/signature-verification.log 2>&1
+python3 scripts/sign_release.py
 python3 scripts/verify.py
-tools/aapt2 dump badging out/HeeSay-5.11.6-v3-universal.apk > out/aapt-badging.txt
+tools/aapt2 dump badging out/HeeSay-5.11.6-v4-universal.apk > out/aapt-badging.txt
 grep "native-code: 'arm64-v8a' 'armeabi-v7a'" out/aapt-badging.txt
-printf '%s\n' 'APK ready: out/HeeSay-5.11.6-v3-universal.apk'
+printf '%s\n' 'APK ready: out/HeeSay-5.11.6-v4-universal.apk'

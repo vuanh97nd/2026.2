@@ -2,3 +2,8 @@ build/
 out/
 tools/
 __pycache__/
+
+.signing/
+*.p12
+*.jks
+*.keystore

@@ -12,7 +12,7 @@ for pos,n,t,tag,attrs in chunks:
   if t==0x102:skip+=1
   elif t==0x103:skip-=1
   continue
- if t==0x102 and tag=='meta-data' and any(a[0]=='name' and a[1] in {'com.android.vending.splits.required','com.android.vending.splits','com.android.vending.derived.apk.id'} for a in attrs):
+ if t==0x102 and tag=='meta-data' and any(a[0]=='name' and a[1] in {'com.android.vending.splits.required','com.android.vending.splits','com.android.vending.derived.apk.id','com.android.stamp.source','com.android.stamp.type'} for a in attrs):
   removed.append(next(a[1] for a in attrs if a[0]=='name'))
   skip=1
   continue
@@ -36,7 +36,7 @@ struct.pack_into('<I',manifest,4,len(manifest))
 parsed=inspect(manifest)
 assert not any(a[0] in {'requiredSplitTypes','isSplitRequired'} for p,n,t,tag,attrs in parsed for a in attrs)
 assert not any(tag=='uses-split' for p,n,t,tag,attrs in parsed)
-out=ROOT/'build/unsigned/HeeSay-v3-single.apk'
+out=ROOT/'build/unsigned/HeeSay-v4-single.apk'
 out.parent.mkdir(parents=True,exist_ok=True)
 seen=set();libs={}
 with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as dst:

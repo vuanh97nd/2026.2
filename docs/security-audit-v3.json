@@ -1,0 +1,17 @@
+{
+  "apk_sha256": "f806ceb2f0b9c7716664b85f608beb72fb0b3ec337736f0210185b68024a3c33",
+  "added_permissions": [],
+  "removed_permissions": [],
+  "application_attribute_changes": {},
+  "changed_entries": [
+    "AndroidManifest.xml",
+    "classes4.dex",
+    "classes5.dex",
+    "classes6.dex",
+    "classes7.dex"
+  ],
+  "added_non_signature_entries": 71,
+  "added_entries_only_native_libraries": true,
+  "zip_integrity_passed": true,
+  "malware_scan_performed": false
+}

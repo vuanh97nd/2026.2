@@ -4,7 +4,7 @@ Quy trình dựng APK đơn từ gói HeeSay/Blued 5.11.6 (`com.blued.internatio
 
 ## Tải và cài
 
-Vào **Releases**, tải `HeeSay-5.11.6-v3-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
+Vào **Releases**, tải `HeeSay-5.11.6-v4-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
 
 APK ký bằng chứng chỉ thử nghiệm, khác chữ ký nhà phát hành. Không cài đè bản chính thức. Sao lưu dữ liệu trước nếu phải gỡ bản cũ. Chưa kiểm thử cài đặt hoặc đăng nhập trên thiết bị Android.
 
@@ -43,3 +43,11 @@ Kiểm tra tự động bao gồm checksum đầu vào/công cụ, đối chiế
 - Lưu bộ lọc và gửi sự kiện tải lại khi xác nhận hoặc bấm Quay lại; bỏ phụ thuộc vào cờ thay đổi của giao diện. Kết quả máy chủ vẫn chưa được kiểm chứng trên thiết bị.
 - Chặn thêm các điểm mở cửa sổ mua VIP/SVIP và ưu đãi; giữ bước chuyển tiếp sau cửa sổ khởi động.
 - Gỡ FLAG_SECURE ở các hàm chặn chụp màn hình đã xác định, không thay đổi cờ màu thanh trạng thái có cùng giá trị số.
+
+## Chữ ký v4 và giới hạn đánh giá an toàn
+
+V4 bỏ khóa debug dùng chung và thông tin source stamp của bản Google Play không còn phù hợp sau khi đóng gói lại. Không đổi tên gói, không làm rối mã để né trình quét và không yêu cầu tắt bảo vệ hệ thống.
+
+Nếu kho có Secrets `APK_SIGNING_KEYSTORE` (PKCS12 base64, alias `heesay-build`) và `APK_SIGNING_PASSWORD`, build dùng khóa đó. Khi chưa cấu hình, runner tạo khóa RSA-3072 riêng cho từng lần chạy và không xuất khóa bí mật trong artifact. Do đó chữ ký sẽ khác giữa các lượt build và có thể phải gỡ bản cũ sau khi sao lưu dữ liệu.
+
+Đối chiếu v3 với gói gốc không thấy quyền bổ sung hoặc thư viện native mới. Đây là kiểm tra cấu trúc, không phải kiểm tra mã độc hay chứng nhận an toàn. Chưa xác định được nguyên nhân cảnh báo High-risk của realme; v4 không bảo đảm loại bỏ cảnh báo. Không tiếp tục cài nếu thiết bị vẫn cảnh báo.

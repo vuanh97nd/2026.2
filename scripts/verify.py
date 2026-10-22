@@ -2,7 +2,7 @@ from pathlib import Path
 import zipfile,hashlib,json,shutil
 from axml import inspect
 ROOT = Path(__file__).resolve().parents[1]
-p=ROOT/'build/signed/HeeSay-v3-single-aligned-debugSigned.apk'
+p=ROOT/'build/signed/HeeSay-v4-single-aligned-signed.apk'
 base=ROOT/'inputs/base.apk'
 with zipfile.ZipFile(p) as z,zipfile.ZipFile(base) as b:
  assert z.testzip() is None
@@ -16,19 +16,27 @@ with zipfile.ZipFile(p) as z,zipfile.ZipFile(base) as b:
    for name in s.namelist():
     if name.startswith('lib/'):assert s.read(name)==z.read(name),name
  parsed=inspect(z.read('AndroidManifest.xml'))
+ original_manifest=inspect(b.read('AndroidManifest.xml'))
+ def permissions(chunks):
+  return {a[1] for _,_,t,tag,attrs in chunks if t==0x102 and tag in {'uses-permission','uses-permission-sdk-23'} for a in attrs if a[0]=='name'}
+ assert permissions(parsed)==permissions(original_manifest), 'Unexpected permission change'
  stack=[]
  for _,_,t,tag,attrs in parsed:
   if t==0x102:stack.append(tag)
   elif t==0x103:assert stack.pop()==tag
  assert not stack
  assert not any(a[0] in {'requiredSplitTypes','splitTypes','isSplitRequired'} for _,_,_,_,attrs in parsed for a in attrs)
- assert not any(a[0]=='name' and a[1] in {'com.android.vending.splits','com.android.vending.splits.required'} for _,_,_,_,attrs in parsed for a in attrs)
-manifest={'modified_dex_and_original_resources_verified':True,'all_71_native_libraries_verified':True,'split_requirements_removed':True,'binary_xml_balanced':True,'zip_integrity_passed':True,'device_tested':False}
+ assert not any(a[0]=='name' and a[1] in {'com.android.vending.splits','com.android.vending.splits.required','com.android.stamp.source','com.android.stamp.type'} for _,_,_,_,attrs in parsed for a in attrs)
+manifest={'modified_dex_and_original_resources_verified':True,'all_71_native_libraries_verified':True,'split_requirements_removed':True,'binary_xml_balanced':True,'zip_integrity_passed':True,'device_tested':False,'added_permissions':[],'malware_scan_performed':False}
 log=(ROOT/'out/signature-verification.log').read_text()
 assert 'signature verified [v1, v2, v3]' in log
 assert '0 errors' in log
 manifest['signature_verified']='v1,v2,v3'
-out=(ROOT/'out/HeeSay-5.11.6-v3-universal.apk')
+signing=json.loads((ROOT/'out/signing.json').read_text())
+assert signing['shared_debug_key_used'] is False
+assert signing['certificate_sha256'] in log
+manifest['signing']=signing
+out=(ROOT/'out/HeeSay-5.11.6-v4-universal.apk')
 shutil.copyfile(p,out)
 manifest['sha256']=hashlib.sha256(out.read_bytes()).hexdigest()
 manifest['bytes']=out.stat().st_size

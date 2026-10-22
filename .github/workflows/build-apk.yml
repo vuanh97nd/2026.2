@@ -19,6 +19,9 @@ jobs:
           distribution: temurin
           java-version: '21'
       - name: Rebuild, merge native libraries and verify
+        env:
+          APK_SIGNING_KEYSTORE: ${{ secrets.APK_SIGNING_KEYSTORE }}
+          APK_SIGNING_PASSWORD: ${{ secrets.APK_SIGNING_PASSWORD }}
         run: bash scripts/build.sh
       - name: Upload build logs and reports
         if: always()
@@ -33,12 +36,13 @@ jobs:
       - name: Publish APK release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: heesay-v3-build-${{ github.run_number }}
+          RELEASE_TAG: heesay-v4-build-${{ github.run_number }}
         run: |
           gh release create "$RELEASE_TAG" \
-            out/HeeSay-5.11.6-v3-universal.apk \
+            out/HeeSay-5.11.6-v4-universal.apk \
             out/SHA256SUMS.txt \
             out/checks.json \
+            out/signing.json \
             --target "$GITHUB_SHA" \
-            --title "HeeSay 5.11.6 v3 — APK đơn (build $GITHUB_RUN_NUMBER)" \
+            --title "HeeSay 5.11.6 v4 — APK đơn (build $GITHUB_RUN_NUMBER)" \
             --notes-file docs/RELEASE.vi.md
