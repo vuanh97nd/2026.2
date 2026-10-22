@@ -1,6 +1,6 @@
-APK thử nghiệm HeeSay/Blued 5.11.6 v5, gộp ARM32 + ARM64.
+APK thử nghiệm HeeSay/Blued 5.11.6 v6, gộp ARM32 + ARM64.
 
-Tải **HeeSay-5.11.6-v5-universal.apk** trong Assets rồi mở để cài. Không cần SAI hay split APK.
+Tải **HeeSay-5.11.6-v6-universal.apk** trong Assets rồi mở để cài. Không cần SAI hay split APK.
 
 Giữ giao diện gốc, chặn quảng cáo đã xác định, bỏ mục quảng bá/lớp che cục bộ của Xung quanh, cho phép chọn bộ lọc nâng cao và tắt kiểm tra cập nhật trong ứng dụng.
 
@@ -19,3 +19,7 @@ V5: hiển thị ảnh/người xem từ dữ liệu đã tải bằng nhánh kh
 Bộ lọc Top/Bot giờ có bước lọc cục bộ theo vai trò hồ sơ, bên cạnh điều kiện gửi máy chủ. Hồ sơ thiếu vai trò bị loại khi bật lọc. Danh sách có thể ít hoặc trống; bỏ chọn vai trò để khôi phục. Chưa xác minh kết quả trên điện thoại.
 
 Chữ ký riêng theo lượt build khác v4: có thể phải gỡ bản cũ sau khi sao lưu dữ liệu. Không cần SAI.
+
+V6: ẩn khung quảng bá VIP/SVIP ở trang Tôi; cho phép áp dụng icon cục bộ; mở thao tác gửi yêu cầu cài đặt riêng tư/ẩn tùy chỉnh/duyệt ẩn danh. **Chưa xác minh bạn đã được ẩn.** Chỉ phản hồi máy chủ quyết định hiệu lực; giữ nguyên hoàn tác nếu bị từ chối. Không ép trạng thái công tắc hoặc VIP. Chưa kiểm tra với tài khoản thứ hai.
+
+Sửa ô hồ sơ Top/Bot thông thường: bấm mở trang cá nhân thay vì nhánh dẫn tới VIP/story. Các mục live/voice đặc biệt giữ xử lý gốc.

@@ -4,7 +4,7 @@ Quy trình dựng APK đơn từ gói HeeSay/Blued 5.11.6 (`com.blued.internatio
 
 ## Tải và cài
 
-Vào **Releases**, tải `HeeSay-5.11.6-v5-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
+Vào **Releases**, tải `HeeSay-5.11.6-v6-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
 
 APK ký bằng chứng chỉ thử nghiệm, khác chữ ký nhà phát hành. Không cài đè bản chính thức. Sao lưu dữ liệu trước nếu phải gỡ bản cũ. Chưa kiểm thử cài đặt hoặc đăng nhập trên thiết bị Android.
 
@@ -57,3 +57,11 @@ Nếu kho có Secrets `APK_SIGNING_KEYSTORE` (PKCS12 base64, alias `heesay-build
 - Danh sách người xem: bỏ các nhánh che giao diện dựa vào VIP trong card/list đã tải. Ảnh sử dụng trường `raw_avatar` hiện có; giữ kiểm tra tài khoản khóa/xóa. Không thay token, quyền tài khoản, API phân trang hoặc hạn mức trả về. Nếu máy chủ chỉ gửi ảnh mờ/thiếu hồ sơ, bản sửa không khôi phục được dữ liệu gốc.
 - Top/Bot: thêm bước lọc chính xác theo ID vai trò ngay trước khi hiển thị trang dữ liệu. Chọn nhiều vai trò được tính OR. Không chọn vai trò thì giữ danh sách như cũ; khi đang lọc, hồ sơ thiếu vai trò bị loại. Không suy đoán vai trò dựa trên ảnh hoặc thông tin khác.
 - Chỉ lọc các trang máy chủ đã trả; có thể còn ít kết quả hoặc trang trống. Hãy bỏ chọn vai trò để trở lại danh sách đầy đủ. Chưa kiểm thử trên điện thoại hoặc tài khoản thực.
+
+## Thay đổi v6: trang Tôi, icon và thao tác riêng tư
+
+Ẩn toàn bộ khung quảng bá VIP/SVIP `SettingHeroCardVipView` tại trang Tôi, kể cả khi dữ liệu khuyến mãi làm mới. Cho phép nút áp dụng icon gọi trình đổi activity-alias cục bộ; manifest đã có bảy alias launcher.
+
+Mở các điều khiển cho ẩn tùy chỉnh/duyệt ẩn danh để gửi yêu cầu cài đặt tới máy chủ. **Không khẳng định trạng thái ẩn đã có hiệu lực.** Hàm `changeSwitch`, phản hồi máy chủ, dữ liệu quyền tài khoản và hàm hoàn tác công tắc khi lỗi được giữ nguyên. Nếu máy chủ từ chối hoặc bật rồi tự tắt, tính năng chưa được bật. Không ép thành công hoặc giả trạng thái VIP. Chưa kiểm thử ẩn danh bằng tài khoản thứ hai; không dựa vào bản mod để bảo đảm không để lại dấu vết.
+
+V6 cũng đổi luồng bấm ô người dùng Xung quanh thông thường sang trang cá nhân qua ID đã tải. Giữ luồng riêng cho mục live/voice/câu lạc bộ và các kiểm tra dữ liệu nhạy cảm trong hàm mở hồ sơ gốc. Không mở dữ liệu mà máy chủ từ chối.
