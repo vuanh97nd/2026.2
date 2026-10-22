@@ -3209,6 +3209,9 @@
     .line 4
     .line 5
     .line 6
+    invoke-static {p1}, Lcom/blued/international/ui/nearby/adapter/NearbyProviderAdapter;->filterLoadedRoles(Ljava/util/List;)Ljava/util/List;
+    move-result-object p1
+
     if-eqz p2, :cond_0
 
     .line 7
@@ -3791,4 +3794,51 @@
     :cond_1
     :goto_0
     return-void
+.end method
+
+# Filter only self-reported role values from the current response, no extra requests.
+.method private static filterLoadedRoles(Ljava/util/List;)Ljava/util/List;
+    .locals 7
+    invoke-static {}, Lcom/blued/international/ui/nearby/util/NearbyPreferencesUtils;->getFilterRole()Ljava/lang/String;
+    move-result-object v0
+    if-eqz v0, :unchanged
+    invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
+    move-result-object v0
+    invoke-virtual {v0}, Ljava/lang/String;->isEmpty()Z
+    move-result v1
+    if-nez v1, :unchanged
+    const-string v1, ","
+    invoke-virtual {v0, v1}, Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;
+    move-result-object v0
+    invoke-static {v0}, Ljava/util/Arrays;->asList([Ljava/lang/Object;)Ljava/util/List;
+    move-result-object v0
+    new-instance v1, Ljava/util/ArrayList;
+    invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
+    invoke-interface {p0}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+    move-result-object v2
+    :loop
+    invoke-interface {v2}, Ljava/util/Iterator;->hasNext()Z
+    move-result v3
+    if-eqz v3, :done
+    invoke-interface {v2}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+    move-result-object v3
+    instance-of v4, v3, Lcom/blued/international/ui/nearby/model/DistanceNearbyUser;
+    if-eqz v4, :keep
+    move-object v4, v3
+    check-cast v4, Lcom/blued/international/ui/nearby/model/DistanceNearbyUser;
+    invoke-virtual {v4}, Lcom/blued/international/ui/nearby/model/DistanceNearbyUser;->getRole()Ljava/lang/String;
+    move-result-object v5
+    if-eqz v5, :loop
+    invoke-virtual {v5}, Ljava/lang/String;->trim()Ljava/lang/String;
+    move-result-object v5
+    invoke-interface {v0, v5}, Ljava/util/List;->contains(Ljava/lang/Object;)Z
+    move-result v6
+    if-eqz v6, :loop
+    :keep
+    invoke-interface {v1, v3}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    goto :loop
+    :done
+    return-object v1
+    :unchanged
+    return-object p0
 .end method

@@ -15,6 +15,7 @@ python3 scripts/patch_ads.py
 python3 scripts/patch_nearby.py
 python3 scripts/patch_filters_update.py
 python3 scripts/patch_v3.py
+python3 scripts/patch_v5.py
 python3 - <<'PY'
 from pathlib import Path
 for source in Path('sources').rglob('*.smali'):
@@ -26,6 +27,6 @@ java -jar tools/apktool.jar b build/patch -o build/rebuilt.apk > out/build.log 2
 python3 scripts/assemble.py
 python3 scripts/sign_release.py
 python3 scripts/verify.py
-tools/aapt2 dump badging out/HeeSay-5.11.6-v4-universal.apk > out/aapt-badging.txt
+tools/aapt2 dump badging out/HeeSay-5.11.6-v5-universal.apk > out/aapt-badging.txt
 grep "native-code: 'arm64-v8a' 'armeabi-v7a'" out/aapt-badging.txt
-printf '%s\n' 'APK ready: out/HeeSay-5.11.6-v4-universal.apk'
+printf '%s\n' 'APK ready: out/HeeSay-5.11.6-v5-universal.apk'

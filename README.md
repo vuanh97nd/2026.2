@@ -4,7 +4,7 @@ Quy trình dựng APK đơn từ gói HeeSay/Blued 5.11.6 (`com.blued.internatio
 
 ## Tải và cài
 
-Vào **Releases**, tải `HeeSay-5.11.6-v4-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
+Vào **Releases**, tải `HeeSay-5.11.6-v5-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
 
 APK ký bằng chứng chỉ thử nghiệm, khác chữ ký nhà phát hành. Không cài đè bản chính thức. Sao lưu dữ liệu trước nếu phải gỡ bản cũ. Chưa kiểm thử cài đặt hoặc đăng nhập trên thiết bị Android.
 
@@ -51,3 +51,9 @@ V4 bỏ khóa debug dùng chung và thông tin source stamp của bản Google P
 Nếu kho có Secrets `APK_SIGNING_KEYSTORE` (PKCS12 base64, alias `heesay-build`) và `APK_SIGNING_PASSWORD`, build dùng khóa đó. Khi chưa cấu hình, runner tạo khóa RSA-3072 riêng cho từng lần chạy và không xuất khóa bí mật trong artifact. Do đó chữ ký sẽ khác giữa các lượt build và có thể phải gỡ bản cũ sau khi sao lưu dữ liệu.
 
 Đối chiếu v3 với gói gốc không thấy quyền bổ sung hoặc thư viện native mới. Đây là kiểm tra cấu trúc, không phải kiểm tra mã độc hay chứng nhận an toàn. Chưa xác định được nguyên nhân cảnh báo High-risk của realme; v4 không bảo đảm loại bỏ cảnh báo. Không tiếp tục cài nếu thiết bị vẫn cảnh báo.
+
+## Thay đổi v5: người xem và vai trò
+
+- Danh sách người xem: bỏ các nhánh che giao diện dựa vào VIP trong card/list đã tải. Ảnh sử dụng trường `raw_avatar` hiện có; giữ kiểm tra tài khoản khóa/xóa. Không thay token, quyền tài khoản, API phân trang hoặc hạn mức trả về. Nếu máy chủ chỉ gửi ảnh mờ/thiếu hồ sơ, bản sửa không khôi phục được dữ liệu gốc.
+- Top/Bot: thêm bước lọc chính xác theo ID vai trò ngay trước khi hiển thị trang dữ liệu. Chọn nhiều vai trò được tính OR. Không chọn vai trò thì giữ danh sách như cũ; khi đang lọc, hồ sơ thiếu vai trò bị loại. Không suy đoán vai trò dựa trên ảnh hoặc thông tin khác.
+- Chỉ lọc các trang máy chủ đã trả; có thể còn ít kết quả hoặc trang trống. Hãy bỏ chọn vai trò để trở lại danh sách đầy đủ. Chưa kiểm thử trên điện thoại hoặc tài khoản thực.
