@@ -1,10 +1,10 @@
 # HeeSay 5.11.6 — standalone APK build
 
-Quy trình dựng APK đơn từ gói HeeSay/Blued 5.11.6 (`com.blued.international`, versionCode `511061`) và mã chỉnh sửa của bản thử nghiệm v2.
+Quy trình dựng APK đơn từ gói HeeSay/Blued 5.11.6 (`com.blued.international`, versionCode `511061`) và mã chỉnh sửa của bản thử nghiệm v3.
 
 ## Tải và cài
 
-Vào **Releases**, tải `HeeSay-5.11.6-v2-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
+Vào **Releases**, tải `HeeSay-5.11.6-v3-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
 
 APK ký bằng chứng chỉ thử nghiệm, khác chữ ký nhà phát hành. Không cài đè bản chính thức. Sao lưu dữ liệu trước nếu phải gỡ bản cũ. Chưa kiểm thử cài đặt hoặc đăng nhập trên thiết bị Android.
 
@@ -15,7 +15,7 @@ APK ký bằng chứng chỉ thử nghiệm, khác chữ ký nhà phát hành. K
 - `inputs/`: các APK thành phần gốc từ tệp APKM người dùng cung cấp; mỗi tệp có SHA-256 xác định.
 - `.github/workflows/build-apk.yml`: GitHub Actions dựng APK và xuất bản tệp trong Releases.
 
-Build giải mã smali bằng Apktool 2.11.1, áp dụng bản sửa, biên dịch, thay đúng ba DEX đã sửa và gộp 71 thư viện native. Khai báo bắt buộc split được loại bỏ khỏi manifest nhị phân. Tài nguyên gốc được giữ nguyên. Công cụ ký là Uber APK Signer 1.3.0; cả hai công cụ được kiểm tra SHA-256 trước khi chạy.
+Build giải mã smali bằng Apktool 2.11.1, áp dụng bản sửa, biên dịch, thay đúng bốn DEX đã sửa và gộp 71 thư viện native. Khai báo bắt buộc split được loại bỏ khỏi manifest nhị phân. Tài nguyên gốc được giữ nguyên. Công cụ ký là Uber APK Signer 1.3.0; cả hai công cụ được kiểm tra SHA-256 trước khi chạy.
 
 ## Phạm vi bản sửa
 
@@ -37,3 +37,9 @@ bash scripts/build.sh
 ```
 
 Kiểm tra tự động bao gồm checksum đầu vào/công cụ, đối chiếu smali đã sửa, tính toàn vẹn ZIP, tài nguyên gốc, thư viện native, khai báo manifest và chữ ký v1/v2/v3. Những kiểm tra này không thay thế thử nghiệm trên điện thoại.
+
+## Thay đổi v3
+
+- Lưu bộ lọc và gửi sự kiện tải lại khi xác nhận hoặc bấm Quay lại; bỏ phụ thuộc vào cờ thay đổi của giao diện. Kết quả máy chủ vẫn chưa được kiểm chứng trên thiết bị.
+- Chặn thêm các điểm mở cửa sổ mua VIP/SVIP và ưu đãi; giữ bước chuyển tiếp sau cửa sổ khởi động.
+- Gỡ FLAG_SECURE ở các hàm chặn chụp màn hình đã xác định, không thay đổi cờ màu thanh trạng thái có cùng giá trị số.

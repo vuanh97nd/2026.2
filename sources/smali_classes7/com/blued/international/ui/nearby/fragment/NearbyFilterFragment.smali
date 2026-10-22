@@ -5184,159 +5184,8 @@
 .end method
 
 .method public final M0(Landroid/view/View;)V
-    .locals 10
-
-    .line 1
-    invoke-virtual {p0}, Lcom/blued/international/ui/nearby/fragment/NearbyFilterFragment;->L0()Z
-
-    .line 2
-    .line 3
-    .line 4
-    move-result v0
-
-    .line 5
-    if-eqz v0, :cond_0
-
-    .line 6
-    .line 7
-    invoke-virtual {p0}, Landroidx/fragment/app/Fragment;->getActivity()Landroidx/fragment/app/FragmentActivity;
-
-    .line 8
-    .line 9
-    .line 10
-    move-result-object v1
-
-    .line 11
-    sget v0, Lcom/blued/international/R$string;->bd_message_group_filter_alert_title:I
-
-    .line 12
-    .line 13
-    invoke-static {v0}, Lcom/blued/international/utils/ResourceUtils;->getString(I)Ljava/lang/String;
-
-    .line 14
-    .line 15
-    .line 16
-    move-result-object v2
-
-    .line 17
-    sget v0, Lcom/blued/international/R$string;->bd_message_group_filter_alert_desc:I
-
-    .line 18
-    .line 19
-    invoke-static {v0}, Lcom/blued/international/utils/ResourceUtils;->getString(I)Ljava/lang/String;
-
-    .line 20
-    .line 21
-    .line 22
-    move-result-object v3
-
-    .line 23
-    sget v0, Lcom/blued/international/R$string;->bd_message_group_filter_alert_cancel:I
-
-    .line 24
-    .line 25
-    invoke-static {v0}, Lcom/blued/international/utils/ResourceUtils;->getString(I)Ljava/lang/String;
-
-    .line 26
-    .line 27
-    .line 28
-    move-result-object v4
-
-    .line 29
-    sget v0, Lcom/blued/international/R$string;->bd_message_group_filter_alert_save:I
-
-    .line 30
-    .line 31
-    invoke-static {v0}, Lcom/blued/international/utils/ResourceUtils;->getString(I)Ljava/lang/String;
-
-    .line 32
-    .line 33
-    .line 34
-    move-result-object v5
-
-    .line 35
-    new-instance v6, Lg14;
-
-    .line 36
-    .line 37
-    invoke-direct {v6, p0, p1}, Lg14;-><init>(Lcom/blued/international/ui/nearby/fragment/NearbyFilterFragment;Landroid/view/View;)V
-
-    .line 38
-    .line 39
-    .line 40
-    new-instance v7, Lh14;
-
-    .line 41
-    .line 42
-    invoke-direct {v7, p0}, Lh14;-><init>(Lcom/blued/international/ui/nearby/fragment/NearbyFilterFragment;)V
-
-    .line 43
-    .line 44
-    .line 45
-    new-instance v8, Li14;
-
-    .line 46
-    .line 47
-    invoke-direct {v8, p0}, Li14;-><init>(Lcom/blued/international/ui/nearby/fragment/NearbyFilterFragment;)V
-
-    .line 48
-    .line 49
-    .line 50
-    const/4 v9, 0x0
-
-    .line 51
-    invoke-static/range {v1 .. v9}, Lcom/blued/android/module/ui/view/dialog/CommonAlertDialog;->showDialogWithTwo(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/content/DialogInterface$OnClickListener;Landroid/content/DialogInterface$OnClickListener;Landroid/content/DialogInterface$OnCancelListener;Z)Landroidx/appcompat/app/AlertDialog;
-
-    .line 52
-    .line 53
-    .line 54
-    move-result-object p1
-
-    .line 55
-    const/4 v0, -0x2
-
-    .line 56
-    invoke-virtual {p1, v0}, Landroidx/appcompat/app/AlertDialog;->getButton(I)Landroid/widget/Button;
-
-    .line 57
-    .line 58
-    .line 59
-    move-result-object v0
-
-    .line 60
-    const/4 v1, 0x0
-
-    .line 61
-    invoke-virtual {v0, v1}, Landroid/widget/TextView;->setAllCaps(Z)V
-
-    .line 62
-    .line 63
-    .line 64
-    const/4 v0, -0x1
-
-    .line 65
-    invoke-virtual {p1, v0}, Landroidx/appcompat/app/AlertDialog;->getButton(I)Landroid/widget/Button;
-
-    .line 66
-    .line 67
-    .line 68
-    move-result-object p1
-
-    .line 69
-    invoke-virtual {p1, v1}, Landroid/widget/TextView;->setAllCaps(Z)V
-
-    .line 70
-    .line 71
-    .line 72
-    return-void
-
-    .line 73
-    :cond_0
-    invoke-direct {p0}, Lcom/blued/international/ui/nearby/fragment/NearbyFilterFragment;->t0()V
-
-    .line 74
-    .line 75
-    .line 76
+    .locals 0
+    invoke-virtual {p0, p1}, Lcom/blued/international/ui/nearby/fragment/NearbyFilterFragment;->l1(Landroid/view/View;)V
     return-void
 .end method
 
@@ -5511,6 +5360,8 @@
 
 .method public final l1(Landroid/view/View;)V
     .locals 1
+    const/4 v0, 0x1
+    iput-boolean v0, p0, Lcom/blued/international/ui/nearby/fragment/NearbyFilterFragment;->G:Z
 
     .line 1
     invoke-virtual {p0}, Lcom/blued/international/ui/nearby/fragment/NearbyFilterFragment;->m1()V

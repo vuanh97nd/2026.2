@@ -33,12 +33,12 @@ jobs:
       - name: Publish APK release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: heesay-v2-build-${{ github.run_number }}
+          RELEASE_TAG: heesay-v3-build-${{ github.run_number }}
         run: |
           gh release create "$RELEASE_TAG" \
-            out/HeeSay-5.11.6-v2-universal.apk \
+            out/HeeSay-5.11.6-v3-universal.apk \
             out/SHA256SUMS.txt \
             out/checks.json \
             --target "$GITHUB_SHA" \
-            --title "HeeSay 5.11.6 v2 — APK đơn (build $GITHUB_RUN_NUMBER)" \
+            --title "HeeSay 5.11.6 v3 — APK đơn (build $GITHUB_RUN_NUMBER)" \
             --notes-file docs/RELEASE.vi.md

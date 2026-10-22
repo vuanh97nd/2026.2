@@ -3,7 +3,7 @@ import struct,zipfile,json
 from axml import inspect
 ROOT = Path(__file__).resolve().parents[1]
 src=ROOT/'inputs/base.apk'
-replacement_dex={name:(ROOT/'build/patch/build/apk'/name).read_bytes() for name in ['classes4.dex','classes5.dex','classes7.dex']}
+replacement_dex={name:(ROOT/'build/patch/build/apk'/name).read_bytes() for name in ['classes4.dex','classes5.dex','classes6.dex','classes7.dex']}
 with zipfile.ZipFile(src) as z: manifest=bytearray(z.read('AndroidManifest.xml'))
 chunks=inspect(manifest)
 parts=[];skip=0;removed=[]
@@ -36,7 +36,7 @@ struct.pack_into('<I',manifest,4,len(manifest))
 parsed=inspect(manifest)
 assert not any(a[0] in {'requiredSplitTypes','isSplitRequired'} for p,n,t,tag,attrs in parsed for a in attrs)
 assert not any(tag=='uses-split' for p,n,t,tag,attrs in parsed)
-out=ROOT/'build/unsigned/HeeSay-v2-single.apk'
+out=ROOT/'build/unsigned/HeeSay-v3-single.apk'
 out.parent.mkdir(parents=True,exist_ok=True)
 seen=set();libs={}
 with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as dst:
