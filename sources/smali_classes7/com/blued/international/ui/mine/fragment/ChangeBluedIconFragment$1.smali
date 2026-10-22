@@ -71,7 +71,11 @@
     move-result-object v0
 
     .line 17
-    invoke-virtual {p1, v0}, Lcom/blued/international/ui/mine/manager/ChangeIconManager;->changeIcon(Landroid/app/Activity;)V
+    invoke-virtual {p1, v0}, Lcom/blued/international/ui/mine/manager/ChangeIconManager;->applyIcon(Landroid/app/Activity;)Z
+    move-result p1
+    if-nez p1, :mod_icon_saved
+    return-void
+    :mod_icon_saved
 
     .line 18
     .line 19

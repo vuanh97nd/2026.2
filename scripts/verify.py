@@ -2,7 +2,7 @@ from pathlib import Path
 import zipfile,hashlib,json,shutil
 from axml import inspect
 ROOT = Path(__file__).resolve().parents[1]
-p=ROOT/'build/signed/HeeSay-v6-single-aligned-signed.apk'
+p=ROOT/'build/signed/HeeSay-v7-single-aligned-signed.apk'
 base=ROOT/'inputs/base.apk'
 with zipfile.ZipFile(p) as z,zipfile.ZipFile(base) as b:
  assert z.testzip() is None
@@ -36,7 +36,7 @@ signing=json.loads((ROOT/'out/signing.json').read_text())
 assert signing['shared_debug_key_used'] is False
 assert signing['certificate_sha256'] in log
 manifest['signing']=signing
-out=(ROOT/'out/HeeSay-5.11.6-v6-universal.apk')
+out=(ROOT/'out/HeeSay-5.11.6-v7-universal.apk')
 shutil.copyfile(p,out)
 manifest['sha256']=hashlib.sha256(out.read_bytes()).hexdigest()
 manifest['bytes']=out.stat().st_size

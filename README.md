@@ -4,7 +4,7 @@ Quy trình dựng APK đơn từ gói HeeSay/Blued 5.11.6 (`com.blued.internatio
 
 ## Tải và cài
 
-Vào **Releases**, tải `HeeSay-5.11.6-v6-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
+Vào **Releases**, tải `HeeSay-5.11.6-v7-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
 
 APK ký bằng chứng chỉ thử nghiệm, khác chữ ký nhà phát hành. Không cài đè bản chính thức. Sao lưu dữ liệu trước nếu phải gỡ bản cũ. Chưa kiểm thử cài đặt hoặc đăng nhập trên thiết bị Android.
 
@@ -65,3 +65,6 @@ Nếu kho có Secrets `APK_SIGNING_KEYSTORE` (PKCS12 base64, alias `heesay-build
 Mở các điều khiển cho ẩn tùy chỉnh/duyệt ẩn danh để gửi yêu cầu cài đặt tới máy chủ. **Không khẳng định trạng thái ẩn đã có hiệu lực.** Hàm `changeSwitch`, phản hồi máy chủ, dữ liệu quyền tài khoản và hàm hoàn tác công tắc khi lỗi được giữ nguyên. Nếu máy chủ từ chối hoặc bật rồi tự tắt, tính năng chưa được bật. Không ép thành công hoặc giả trạng thái VIP. Chưa kiểm thử ẩn danh bằng tài khoản thứ hai; không dựa vào bản mod để bảo đảm không để lại dấu vết.
 
 V6 cũng đổi luồng bấm ô người dùng Xung quanh thông thường sang trang cá nhân qua ID đã tải. Giữ luồng riêng cho mục live/voice/câu lạc bộ và các kiểm tra dữ liệu nhạy cảm trong hàm mở hồ sơ gốc. Không mở dữ liệu mà máy chủ từ chối.
+
+
+V7: sửa lỗi icon tự về mặc định khi mở trang chính; bỏ danh sách alias tắt tích lũy có thể tắt cả icon vừa chọn; bật icon mới trước, lưu đồng bộ trước khi tắt icon cũ, không gọi lại các alias đã có trạng thái đúng. Nếu Android từ chối thì hiển thị lỗi, không hiện hộp thoại thành công. Launcher có thể vẫn làm mới hoặc đóng tác vụ khi đổi alias; chưa kiểm thử trên realme. Không có thay đổi mới cho tính năng riêng tư phía máy chủ; chưa xác minh ẩn danh hoạt động.

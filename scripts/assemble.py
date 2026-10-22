@@ -36,7 +36,7 @@ struct.pack_into('<I',manifest,4,len(manifest))
 parsed=inspect(manifest)
 assert not any(a[0] in {'requiredSplitTypes','isSplitRequired'} for p,n,t,tag,attrs in parsed for a in attrs)
 assert not any(tag=='uses-split' for p,n,t,tag,attrs in parsed)
-out=ROOT/'build/unsigned/HeeSay-v6-single.apk'
+out=ROOT/'build/unsigned/HeeSay-v7-single.apk'
 out.parent.mkdir(parents=True,exist_ok=True)
 seen=set();libs={}
 with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED,compresslevel=6) as dst:
