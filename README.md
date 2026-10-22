@@ -4,7 +4,7 @@ Quy trình dựng APK đơn từ gói HeeSay/Blued 5.11.6 (`com.blued.internatio
 
 ## Tải và cài
 
-Vào **Releases**, tải `HeeSay-5.11.6-v7-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
+Vào **Releases**, tải `HeeSay-5.11.6-v8-universal.apk`, rồi mở tệp để cài. APK gồm thư viện ARM32 và ARM64, không cần SAI hoặc cài split riêng.
 
 APK ký bằng chứng chỉ thử nghiệm, khác chữ ký nhà phát hành. Không cài đè bản chính thức. Sao lưu dữ liệu trước nếu phải gỡ bản cũ. Chưa kiểm thử cài đặt hoặc đăng nhập trên thiết bị Android.
 
@@ -68,3 +68,6 @@ V6 cũng đổi luồng bấm ô người dùng Xung quanh thông thường sang
 
 
 V7: sửa lỗi icon tự về mặc định khi mở trang chính; bỏ danh sách alias tắt tích lũy có thể tắt cả icon vừa chọn; bật icon mới trước, lưu đồng bộ trước khi tắt icon cũ, không gọi lại các alias đã có trạng thái đúng. Nếu Android từ chối thì hiển thị lỗi, không hiện hộp thoại thành công. Launcher có thể vẫn làm mới hoặc đóng tác vụ khi đổi alias; chưa kiểm thử trên realme. Không có thay đổi mới cho tính năng riêng tư phía máy chủ; chưa xác minh ẩn danh hoạt động.
+
+
+V8: ba nút Xem ở đầu danh sách lọc ngay các hồ sơ đã tải theo lượt xem > 1, online_state = 1, hoặc khoảng cách gốc hợp lệ dưới 10 km. Không suy đoán trạng thái online/khoảng cách đã ẩn hoặc làm mờ, không hiện tài khoản khóa/xóa. Bấm lại cùng nút để bỏ lọc; đổi nút sẽ lọc từ bản dữ liệu đầy đủ đã lưu. Nếu không có kết quả, báo rõ và giữ danh sách hiện tại. Dữ liệu mới tải về xóa trạng thái lọc cục bộ. Số đếm phía trên vẫn là tổng do máy chủ trả, không phải số kết quả cục bộ. Không tăng hạn mức hoặc lấy thêm dữ liệu bằng API khác. Hai tab HEE/Đã ghé thăm được mở nhánh hiển thị và bấm hồ sơ cục bộ, cho cả dạng lưới và danh sách. Chưa thử trên điện thoại; ẩn danh/ẩn tùy chỉnh chưa được sửa phía máy chủ.

@@ -22,7 +22,7 @@ key.chmod(0o600)
 cert=subprocess.check_output(['keytool','-exportcert','-alias','heesay-build','-keystore',str(key),'-storepass:env','SIGNING_STORE_PASSWORD'],env=env)
 fingerprint=hashlib.sha256(cert).hexdigest()
 with (root/'out/signature-verification.log').open('w') as log:
- result=subprocess.run(['java','-jar',str(root/'tools/signer.jar'),'-a',str(root/'build/unsigned/HeeSay-v7-single.apk'),'-o',str(root/'build/signed'),'--allowResign','--ks',str(key),'--ksAlias','heesay-build','--ksPass',password,'--ksKeyPass',password],env=env,check=False,stdout=log,stderr=subprocess.STDOUT)
+ result=subprocess.run(['java','-jar',str(root/'tools/signer.jar'),'-a',str(root/'build/unsigned/HeeSay-v8-single.apk'),'-o',str(root/'build/signed'),'--allowResign','--ks',str(key),'--ksAlias','heesay-build','--ksPass',password,'--ksKeyPass',password],env=env,check=False,stdout=log,stderr=subprocess.STDOUT)
  if result.returncode:raise RuntimeError("APK signing failed; inspect signature-verification.log")
 report={'mode':mode,'certificate_sha256':fingerprint,'shared_debug_key_used':False,'key_algorithm':'RSA-3072','malware_scan_performed':False}
 (root/'out/signing.json').write_text(json.dumps(report,indent=2))
